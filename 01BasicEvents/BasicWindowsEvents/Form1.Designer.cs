@@ -41,6 +41,7 @@
             this.SubmitButton.TabIndex = 0;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // CountriesComboBox
             // 
@@ -53,6 +54,7 @@
             this.CountriesComboBox.Name = "CountriesComboBox";
             this.CountriesComboBox.Size = new System.Drawing.Size(121, 21);
             this.CountriesComboBox.TabIndex = 1;
+            this.CountriesComboBox.SelectedIndexChanged += new System.EventHandler(this.CountriesComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -73,6 +75,7 @@
             this.Controls.Add(this.SubmitButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
