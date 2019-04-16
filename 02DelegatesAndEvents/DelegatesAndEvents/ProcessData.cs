@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DelegatesAndEvents
 {
@@ -18,6 +14,12 @@ namespace DelegatesAndEvents
         {
             action(x, y);
             Console.WriteLine("Action has been processed");
+        }
+
+        public void ProcessFunction(int x, int y, Func<int, int, int> functionDelegate)
+        {
+            var result = functionDelegate(x, y);
+            Console.WriteLine($"Function processed. Result = {result}");
         }
     }
 }
