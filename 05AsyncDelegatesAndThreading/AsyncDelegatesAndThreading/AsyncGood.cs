@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows.Forms;
 
 namespace ThreadsAndDelegates
 {
     public partial class AsyncGood : Form
     {
-        delegate void UpdateProgressDelegate(int val);
+        delegate void StartProcessDelegate(int val);
+
+        delegate void ShowProgressDelegate(int val);
 
         public AsyncGood()
         {
@@ -27,7 +21,7 @@ namespace ThreadsAndDelegates
 
         private void StartButton_Click(object sender, System.EventArgs e)
         {
-            UpdateProgressDelegate progDel = new UpdateProgressDelegate(StartProcess);
+            StartProcessDelegate progDel = new StartProcessDelegate(StartProcess);
             progDel.BeginInvoke(100, null, null);
             MessageBox.Show("Done with operation!!");
 
@@ -46,7 +40,17 @@ namespace ThreadsAndDelegates
 
         private void ShowProgress(int i)
         {
-
+            // This is hit if a background thread calls ShowProgress()  
+            if (lblOutput.InvokeRequired)
+            {
+                var del = new ShowProgressDelegate(ShowProgress);
+                this.BeginInvoke(del, new object[] { i });
+            }
+            else
+            {
+                lblOutput.Text = i.ToString();
+                pbStatus.Value = i;
+            }
         }
 
     }
